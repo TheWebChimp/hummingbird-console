@@ -1,0 +1,70 @@
+body {
+
+	background: url('../images/static.gif');
+	font-family: 'Ubuntu Mono', monospace;
+	color: #6ec300;
+	text-shadow: 0 0 20px rgba(110, 195, 0, 0.85);
+	letter-spacing: 2px;
+	font-size: 15px;
+}
+
+a { color: #6ec300; }
+a:hover { background-color: #6ec300; color: #030516; }
+
+.octocat {
+
+	position: fixed;
+	left: 0;
+	top: 0;
+}
+
+.love {
+
+	float: right;
+}
+
+.page-header {
+
+	height: 64px;
+	background: url('../images/dotted.png') center bottom repeat-x;
+}
+
+.logo {
+
+	display: block;
+	width: 190px;
+	text-align: right;
+	margin: 30px auto;
+	margin-bottom: -10px;
+}
+
+.slogan {
+
+	text-align: center;
+	margin-bottom: 40px;
+	position: relative;
+	z-index: 100;
+}
+
+.intro {
+
+	text-align: left;
+	width: 810px;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 50px;
+}
+
+.download {
+
+	padding-top: 40px;
+	min-height: 392px;
+	background: url('../images/computer.png') center top no-repeat;
+}
+
+.download-button {
+
+	margin: 0 auto;
+	width: 270px;
+	padding-top: 20px;
+}
