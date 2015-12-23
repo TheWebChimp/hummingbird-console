@@ -52,17 +52,46 @@
 		function indexAction() {
 			global $site;
 			$request = $site->mvc->getRequest();
+			$login = get_item($_SESSION, 'login');
+
 			switch ($request->type) {
 				case 'get':
 					$site->enqueueStyle('console');
 					$site->enqueueScript('console');
-					$this->view->render('/index-page');
+
+					if( $this->checkLogin($login) ) {
+
+						$this->view->render('/index-page');
+
+					} else {
+
+						$this->view->render('/login-page');
+					}
 					break;
 				case 'post':
-					$code = $request->post('code');
-					$code = preg_replace('/^\s*\<\?php/', '', $code);
-					$code = preg_replace('/\?\>\s*$/', '', $code);
-					eval($code);
+
+					if( $this->checkLogin($login) ) {
+
+						$code = $request->post('code');
+						$code = preg_replace('/^\s*\<\?php/', '', $code);
+						$code = preg_replace('/\?\>\s*$/', '', $code);
+						eval($code);
+
+					} else {
+
+						$password = md5( $request->post('password') );
+
+						if( $this->checkLogin($password) ) {
+
+							$_SESSION['login'] = $password;
+							$site->redirectTo($site->urlTo('/console'));
+
+						} else {
+
+							$site->redirectTo($site->urlTo('/console?msg=400'));
+						}
+					}
+
 					break;
 			}
 		}
@@ -72,6 +101,11 @@
 			$site->enqueueStyle('console');
 			$site->enqueueScript('console');
 			$this->view->render('/index-page');
+		}
+
+		function checkLogin($password) {
+			global $site;
+			return md5($site->getOption('console_password')) == $password;
 		}
 	}
 

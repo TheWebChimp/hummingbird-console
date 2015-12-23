@@ -6,10 +6,9 @@
 <head>
 	<title><?php echo $site->getPageTitle(); ?></title>
 
-	<?php $site->metaTags(); ?>
-
 	<link rel="shortcut icon" href="<?php $site->img('favicon.ico'); ?>">
 	<link rel="icon" href="<?php $site->img('favicon.png'); ?>" type="image/png">
+
 	<?php $site->includeStyles(); ?>
 	<?php $site->includeScript('modernizr'); ?>
 	<?php $site->includeScript('respond'); ?>
@@ -56,7 +55,7 @@
 				<div class="margins">
 					<div class="footer-copyright">
 						<small class="cf">
-							<span class="copyright-left">Copyright &copy; 2015 biohzrdmx</span>
+							<span class="copyright-left">Copyright &copy; 2015 biohzrdmx &amp; tets</span>
 							<span class="copyright-right">Made with <strong>Hummingbird</strong> &amp; <strong>Chimplate</strong> and tons of <i class="fa fa-heart"></i></span>
 						</small>
 					</div>
