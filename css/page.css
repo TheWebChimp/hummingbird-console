@@ -16,6 +16,7 @@ a:hover { background-color: #6ec300; color: #030516; }
 	position: fixed;
 	left: 0;
 	top: 0;
+	z-index: 100;
 }
 
 .love {
@@ -48,8 +49,8 @@ a:hover { background-color: #6ec300; color: #030516; }
 
 .intro {
 
-	text-align: left;
-	width: 810px;
+	text-align: center;
+	width: 90%;
 	display: block;
 	margin: 0 auto;
 	margin-bottom: 50px;
@@ -57,9 +58,11 @@ a:hover { background-color: #6ec300; color: #030516; }
 
 .download {
 
+	text-align: center;
 	padding-top: 40px;
-	min-height: 392px;
-	background: url('../images/computer.png') center top no-repeat;
+	width: 90%;
+	margin: 0 auto;
+	padding-bottom: 100px;
 }
 
 .download-button {
@@ -76,3 +79,33 @@ a:hover { background-color: #6ec300; color: #030516; }
 	padding: 15px 30px;
 	border: 1px solid #6ec300;
 }
+
+/* Tablet */
+/* ---------------------------------------------------------------------------------------------- */
+
+@media (min-width: 768px) { }
+
+/* Desktop */
+/* ---------------------------------------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+
+	.intro {
+
+		text-align: left;
+		width: 810px;
+	}
+
+	.download {
+
+		text-align: left;
+		width: 100%;
+		min-height: 392px;
+		background: url('../images/computer.png') center top no-repeat;
+	}
+}
+
+/* Wide */
+/* ---------------------------------------------------------------------------------------------- */
+
+@media (min-width: 1280px) { }

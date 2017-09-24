@@ -903,6 +903,7 @@ input::-moz-focus-inner {
 	.row .col.col-md-3 	{ width: 25.0%; }
 	.row .col.col-md-4 	{ width: 33.3333333333%; }
 	.row .col.col-md-6 	{ width: 50.0%; }
+	.row .col.col-md-12 { width: 100.0%; }
 
 	.row .col.col-offset-md-3 	{ margin-left: 25.0%; }
 	.row .col.col-offset-md-4 	{ margin-left: 33.3333333333%; }
