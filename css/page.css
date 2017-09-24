@@ -65,6 +65,14 @@ a:hover { background-color: #6ec300; color: #030516; }
 .download-button {
 
 	margin: 0 auto;
-	width: 270px;
-	padding-top: 20px;
+	width: 280px;
+	padding-top: 50px;
+}
+
+.download-button a {
+
+	text-align: center;
+	display: block;
+	padding: 15px 30px;
+	border: 1px solid #6ec300;
 }
