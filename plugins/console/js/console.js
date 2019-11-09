@@ -1,10 +1,11 @@
 jQuery(document).ready(function($) {
 
-	$('.codemirror').each(function() {
+	$('.codemirror-editor').each(function() {
 		var el = $(this),
 			mode = el.data('mode'),
 			readOnly = el.data('readonly') || false,
 			textarea = el.find('textarea');
+
 		var editor = CodeMirror.fromTextArea(textarea[0], {
 			styleActiveLine: true,
 			autoCloseBrackets: true,
@@ -21,7 +22,7 @@ jQuery(document).ready(function($) {
 
 	$('#form-code').ajaxForm({
 		success: function(response) {
-			$('.console-output').html(response);
+			$('.console-output').html(response.data);
 		}
 	});
 

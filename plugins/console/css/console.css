@@ -28,6 +28,16 @@ a,hr{padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,hr,m
 html, body {
 
 	height: 100%;
+	display: flex;
+	flex: 1 0;
+	flex-direction: column;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAICAYAAADA+m62AAAAPUlEQVQoU2NkQAPnz5//b2hoyIgujiIAU4RNMVwhuiQ6H6wQl3XI4oy4FMHcCJPHcDS6J2A2EqUQpJhohQDK6yd1dytR9AAAAABJRU5ErkJggg==);
+}
+
+section {
+
+	flex: 1 0;
+	width: 100%;
 }
 
 /* Login */
@@ -35,10 +45,9 @@ html, body {
 
 .login-page {
 
-	background: #009688;
-	-webkit-transform-style: preserve-3d;
-	   -moz-transform-style: preserve-3d;
-			transform-style: preserve-3d;
+	background: #333;
+	justify-content: center;
+	align-items: center;
 }
 
 .login-box {
@@ -49,12 +58,6 @@ html, body {
 	max-width: 90%;
 	width: 300px;
 	background: rgba(255,255,255,0.2);
-	top: 50%;
-	-webkit-transform: translateY(-50%);
-	   -moz-transform: translateY(-50%);
-		-ms-transform: translateY(-50%);
-		 -o-transform: translateY(-50%);
-			transform: translateY(-50%);
 }
 
 .login-box .form-control {
@@ -78,22 +81,14 @@ html, body {
 
 .console-wrapper {
 
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-	margin: 0 auto -64px;
-}
-
-.console-footer, .console-push {
-
-	height: 64px;
+	display: flex;
+	flex-direction: column;
 }
 
 .console-header {
 
-	background: #009688;
+	background: #333;
 	color: #FFFFFF;
-	border-bottom: 10px solid #00796B;
 }
 
 .console-header h2 {
@@ -102,9 +97,45 @@ html, body {
 	font-weight: 300;
 }
 
+.block-console {
+
+	flex: 1 0;
+	width: 100%;
+	flex-direction: column;
+	display: flex;
+}
+
+.block-console .boxfix-vert {
+
+	flex: 1 0;
+	width: 100%;
+	box-sizing: border-box;
+	flex-direction: column;
+	display: flex;
+}
+
+.block-console .boxfix-vert .margins {
+
+	box-sizing: border-box;
+	flex: 1 0;
+	flex-direction: column;
+	display: flex;
+}
+
+.block-console .boxfix-vert .margins .row {
+
+	flex: 1 0 auto;
+}
+
+.block-console .boxfix-vert .margins .row .col {
+
+	display: flex;
+	flex: 1 0 auto;
+}
+
 .console-footer {
 
-	background: #009688;
+	background: #333;
 	color: #FFFFFF;
 }
 
@@ -116,23 +147,28 @@ html, body {
 
 .form-code {
 
+	width: 100%;
 	margin-bottom: 15px;
 }
 
 .box-output {
 
-	border: 2px solid #B2DFDB;
+	background:  rgba(255,255,255, 0.75);
+	border: 2px solid #CCC;
 	margin-bottom: 0;
+	flex: 1 0;
+}
+
+.box-output pre {
+
+	max-height: 200px;
+	overflow: auto;
+	font-size: 0.8em;
 }
 
 @media (min-width: 1000px) {
 
-	.console-wrapper {
-
-		margin: 0 auto -48px;
-	}
-
-	.console-footer, .console-push {
+	.console-footer {
 
 		height: 48px;
 	}

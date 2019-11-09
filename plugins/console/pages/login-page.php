@@ -27,11 +27,12 @@
 			<div class="form-fields">
 				<h2 class="title"><i class="fa fa-fw fa-code"></i> Console</h2>
 				<div class="form-group">
-					<input placeholder="Enter console password to proceed" class="input-block form-control form-control-xlarge" type="password" name="password" id="password">
+					<input class="hide" type="text" name="user" autocomplete="username">
+					<input placeholder="Enter console password to proceed" class="input-block form-control" type="password" name="password" id="password" autocomplete="new-password">
 				</div>
 			</div>
 			<div class="form-actions">
-				<button class="button button-block button-primary button-xlarge">Access</button>
+				<button class="button button-block button-primary">Access</button>
 			</div>
 		</form>
 	</div>

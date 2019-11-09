@@ -18,40 +18,23 @@
 		function __construct() {
 
 			global $site;
+			$site->getRouter()->addRoute('/console', 'Console::indexAction', true);
 
-			$site->registerStyle('google-fonts', '//fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic,300,300italic|Raleway|Oswald:400,300' );
-			$site->registerStyle('font-awesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css' );
+			$site->registerStyle('google-fonts', '//fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic,300,300italic|Raleway|Oswald:400,300', true);
+			$site->registerStyle('font-awesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css', true);
+			$site->registerStyle('codemirror', $site->baseUrl('/plugins/console/css/codemirror.css'), true);
+			$site->registerStyle('codemirror.monokai', $site->baseUrl('/plugins/console/css/codemirror.monokai.css'), true, ['codemirror']);
+			$site->registerStyle('console', $site->baseUrl('/plugins/console/css/console.css'), true, ['google-fonts', 'font-awesome', 'codemirror.monokai']);
 
-			$site->registerStyle('codemirror', $site->baseUrl('/plugins/console/css/codemirror.css') );
-			$site->registerStyle('codemirror.monokai', $site->baseUrl('/plugins/console/css/codemirror.monokai.css'), array('codemirror') );
-
-			$site->registerStyle('console', $site->baseUrl('/plugins/console/css/console.css'), array('google-fonts', 'font-awesome', 'codemirror.monokai') );
-
-			$site->registerScript('codemirror', $site->baseUrl('/plugins/console/js/codemirror.min.js') );
-			$site->registerScript('console', $site->baseUrl('/plugins/console/js/console.js'), array('jquery', 'codemirror', 'jquery.form') );
+			$site->registerScript('codemirror', $site->baseUrl('/plugins/console/js/codemirror.min.js'), true);
+			$site->registerScript('jquery.form', '//cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js', true);
+			$site->registerScript('console', $site->baseUrl('/plugins/console/js/console.js'), true, ['jquery', 'codemirror', 'jquery.form']);
 		}
-	}
 
-	class ConsoleView extends View {
-		function init() {
-
+		static public function indexAction() {
 			global $site;
-			$this->pages_dir = $site->baseDir('/plugins/console/pages');
-			$this->parts_dir = $site->baseDir('/plugins/console/parts');
-		}
-	}
-
-	class ConsoleController extends Controller {
-
-		public $view;
-
-		function init() {
-			$this->view = new ConsoleView();
-		}
-
-		function indexAction() {
-			global $site;
-			$request = $site->mvc->getRequest();
+			$request = $site->getRequest();
+			$response = $site->getResponse();
 			$login = get_item($_SESSION, 'login');
 
 			switch ($request->type) {
@@ -59,29 +42,35 @@
 					$site->enqueueStyle('console');
 					$site->enqueueScript('console');
 
-					if( $this->checkLogin($login) ) {
+					if( Console::checkLogin($login) ) {
 
-						$this->view->render('/index-page');
+						$site->render('/index-page', [], $site->baseDir('/plugins/console/pages'));
 
 					} else {
 
-						$this->view->render('/login-page');
+						$site->render('/login-page', [], $site->baseDir('/plugins/console/pages'));
 					}
-					break;
+				break;
 				case 'post':
 
-					if( $this->checkLogin($login) ) {
+					if( Console::checkLogin($login) ) {
 
 						$code = $request->post('code');
 						$code = preg_replace('/^\s*\<\?php/', '', $code);
 						$code = preg_replace('/\?\>\s*$/', '', $code);
+
+						ob_start();
 						eval($code);
+						$data = ob_get_clean();
+
+						$response->setStatus(200);
+						return $response->ajaxRespond('success', $data, '');
 
 					} else {
 
-						$password = md5( $request->post('password') );
+						$password = $request->post('password');
 
-						if( $this->checkLogin($password) ) {
+						if( Console::checkLogin($password) ) {
 
 							$_SESSION['login'] = $password;
 							$site->redirectTo($site->urlTo('/console'));
@@ -92,20 +81,15 @@
 						}
 					}
 
-					break;
+				break;
 			}
+
+			return $response->respond();
 		}
 
-		function showAction($id) {
+		static public function checkLogin($password) {
 			global $site;
-			$site->enqueueStyle('console');
-			$site->enqueueScript('console');
-			$this->view->render('/index-page');
-		}
-
-		function checkLogin($password) {
-			global $site;
-			return md5($site->getOption('console_password')) == $password;
+			return $site->getOption('console_password') == md5($password);
 		}
 	}
 
